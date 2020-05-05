@@ -1,5 +1,5 @@
 import unittest
-from src.lines_processing.merge_lines import merge_lines, combine_lines, map_lines, extend_line
+from src.traffic_lanes_pipeline.merge_lines import merge_lines, combine_lines, map_lines
 
 class TestLineMergeMethods(unittest.TestCase):
 
@@ -43,14 +43,9 @@ class TestLineMergeMethods(unittest.TestCase):
         res = combine_lines([line1, line2])
         self.assertEqual(res, [[47, 30, 76, 49]])
 
-    def test_extend_line(self):
-        line = [[2, 6, 4, 8]]
-        res = extend_line(line, 10)
-        expected = [[2, 6, 6,10]]
-        self.assertEqual(res, expected)
-
         # case required for extended line going outside of
-        # image 
+        # image
+
 
 
 if __name__ == '__main__':
