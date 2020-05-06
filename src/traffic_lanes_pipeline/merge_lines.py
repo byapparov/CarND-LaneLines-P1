@@ -10,28 +10,35 @@ def merge_lines(lines):
         res_list[value].append(key)
 
     res = {}
-
     for key, value in res_list.items():
         res[key] = combine_lines([lines[i] for i in value])
 
     return list(res.values())
 
 def map_lines(lines):
+    """Makes a dictionary of lists mapping lines with close angles"""
     res = []
     angles_map = dict()
 
-    for i in range(len(lines)):
-        angles_map[i] = i
+    # Getting sorted index taken here:
+    # https://stackoverflow.com/questions/6422700/how-to-get-indices-of-a-sorted-array-in-python
+    sorted_lines_index = sorted(((e,i) for i,e in enumerate(lines)), key= lambda x: line_angle(x[0]))
+    sorted_lines_index = [x[1] for x in sorted_lines_index]
+    # print("Sorted Lines Index: {sorted_lines_index}".format(sorted_lines_index = sorted_lines_index))
+    lines = sort_lines(lines)
 
+    current_line = 0
+    difference = 0
     for i in range(len(lines)):
-        for j in range(len(lines)):
-            if i < j:
-                if angles_map[i] == i:
-                    angle = diff_angle(lines[i], lines[j])
-                    if angle <= 5:
-                        angles_map[j] = i
+        if i > 0:
+            difference = diff_angle(lines[i], lines[i - 1])
+            if difference > 3:
+                current_line = i
+
+        angles_map[sorted_lines_index[i]] = sorted_lines_index[current_line]
 
     return angles_map
+
 
 
 def combine_lines(lines):

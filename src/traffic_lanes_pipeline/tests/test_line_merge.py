@@ -17,8 +17,8 @@ class TestLineMergeMethods(unittest.TestCase):
 
         res = merge_lines(lines)
         expected = [
-            [[473, 301, 767, 493]],
-            [[138, 539, 483, 300]]
+            [[138, 539, 483, 300]],
+            [[473, 301, 767, 493]]
         ]
         self.assertEqual(res, expected)
 
@@ -33,7 +33,8 @@ class TestLineMergeMethods(unittest.TestCase):
         ]
 
         res = map_lines(lines)
-        expected = {0: 0, 1: 0, 2: 2, 3: 2, 4: 2}
+
+        expected = {4: 4, 3: 4, 2: 4, 1: 1, 0: 1}
         self.assertEqual(res, expected)
 
     def test_combine_lines(self):
