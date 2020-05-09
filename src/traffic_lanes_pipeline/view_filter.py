@@ -21,13 +21,12 @@ def lane_view_pixel(y, x, h, w, y_cut):
         y_0 = m * x + b
         return y > y_0
 
-def limit_view(image, color=0):
+def limit_view(image, ratio, color=0):
     assert (len(image.shape) == 2), "Only grey scale images are supported"
     img = image.copy()
     height, width = img.shape
 
-    y_cut = int(0.45 * height)
-    print(y_cut)
+    y_cut = int(ratio * height)
     for x in range(0, width):
         for y in range(0, height):
             if not lane_view_pixel(y, x, height, width, y_cut):
