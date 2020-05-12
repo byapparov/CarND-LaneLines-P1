@@ -193,9 +193,12 @@ In response to the challenge I have introduced the following changes to the orig
 
 Saturation extracted from HSV image produces following result, where you can see left Yellow line very clearly in this example:
 
-Original Image | Greyscale Single Layer
+Original Image | Greyscale Saturation Layer
 :--------:|:--------:
 ![Original Image](writeup_images/image.jpg)|![Saturation Layer](writeup_images/image_hsv_grey.jpg)
 
+2. Lines are combined in lanes by weighted averaging of line coordinates;
 
- 2. Lines are combined in lanes by weighted averaging of line coordinates;
+Note that lanes detected in Grey layer are colored as `red` while lanes from Saturation layer are `blue`. 
+
+I did not merge lanes detected after different filters applied for demonstration purposes. 

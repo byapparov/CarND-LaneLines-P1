@@ -11,7 +11,7 @@ Naturally, one of the first things we would like to do in developing a self-driv
 
 This repository contains solution for the *Project 1: Finding Lane Lines*.
 
-Repository contains following code:
+Repository contains the following code:
 
 * `src` directory contains library code with the image processing pipeline
 * `identify_lanes_images.ipynb` - Jupiter Notebook file with the research for lane detection.
