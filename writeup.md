@@ -105,7 +105,17 @@ After potential lanes are identified, they are filtered for these conditions:
 
  - Angle of the lane must be over 25 degrees;
  - Projections of the lines contributing to the lane on Y axis should cover 25% of lanes height.
-
+ 
+ ### Demonstration on the test images
+ 
+ File Name | Input | Output
+:--------:|:--------:|:--------:
+solidWhiteCurve.jpg | ![Original Image](test_images/solidWhiteCurve.jpg)|![Processed Image](test_images_out/solidWhiteCurve.jpg)
+solidWhiteRight.jpg | ![Original Image](test_images/solidWhiteRight.jpg)|![Processed Image](test_images_out/solidWhiteRight.jpg)
+solidYellowCurve.jpg | ![Original Image](test_images/solidYellowCurve.jpg)|![Processed Image](test_images_out/solidYellowCurve.jpg)
+solidYellowCurve2.jpg | ![Original Image](test_images/solidYellowCurve2.jpg)|![Processed Image](test_images_out/solidYellowCurve2.jpg)
+solidYellowLeft.jpg | ![Original Image](test_images/solidYellowLeft.jpg)|![Processed Image](test_images_out/solidYellowLeft.jpg)
+whiteCarLaneSwitch.jpg | ![Original Image](test_images/whiteCarLaneSwitch.jpg)|![Processed Image](test_images_out/whiteCarLaneSwitch.jpg)
 
 ## 2. Pipeline shortcomings
 
@@ -130,6 +140,8 @@ thresholds and reduce edge detection quality for the area of interest.
 that we probably will need to address by allowing for shorter line segments or through additional transformation of the image that 
 would allow detect road lines still.
 
+* Pipeline was not tested on images with text or signs drawn on the road.
+
 
 ## 3. Suggest possible improvements to your pipeline
 
@@ -147,7 +159,7 @@ hundreds of tagged images taken in different conditions and compare pipeline out
 
 ### Edge Detection
 
-Despite the fact that edge detection seems to be very stable on the test images, it would be benefitial to understand
+Despite the fact that edge detection seems to be very stable on the test images, it would be beneficial to understand
 how it changes in Fog, Rain and Night conditions. If there is an impact on the result, we would need to add a step
 to detect these conditions and change algorithm parameters dynamically. 
 
@@ -173,10 +185,17 @@ Challenge Video has confirmed following pipeline shortcomings:
  - Road turns introduced some jitter in lane detection;
  - Change in road surface introduced line segments going across the road;
  
- In addition to that:
- - Shadows and trees along the road introduced additional segments;
+In addition to that shadows and trees along the road introduced additional segments;
 
 In response to the challenge I have introduced the following changes to the original algorithm:
 
- - Segments are detected from the saturation layer of HSV representation of the image
- - Lines are combined in lanes by weighted averaging lines;
+1. Additional segments are detected from the saturation layer of HSV representation of the image;
+
+Saturation extracted from HSV image produces following result, where you can see left Yellow line very clearly in this example:
+
+Original Image | Greyscale Single Layer
+:--------:|:--------:
+![Original Image](writeup_images/image.jpg)|![Saturation Layer](writeup_images/image_hsv_grey.jpg)
+
+
+ 2. Lines are combined in lanes by weighted averaging of line coordinates;
